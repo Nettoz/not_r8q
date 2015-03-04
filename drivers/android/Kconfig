@@ -54,7 +54,7 @@ config ANDROID_BINDER_IPC_SELFTEST
 	  exhaustively with combinations of various buffer sizes and
 	  alignments.
 
-<<<<<<< HEAD
+
 config ANDROID_BINDER_LOGS
 	bool "Android Binder Logging"
 	depends on ANDROID_BINDERFS
@@ -64,7 +64,7 @@ config ANDROID_BINDER_LOGS
 	  This option impacts performance.
 
 	  Say N on production builds.
-=======
+
 config ANDROID_SIMPLE_LMK
 	bool "Simple Android Low Memory Killer"
 	depends on !ANDROID_LOW_MEMORY_KILLER && !MEMCG
@@ -120,7 +120,6 @@ config ANDROID_SIMPLE_LMK_TIMEOUT_MSEC
 
 endif
 
->>>>>>> 58ecd977a286 (simple_lmk: Introduce Simple Low Memory Killer for Android)
 endif # if ANDROID
 
 endmenu
