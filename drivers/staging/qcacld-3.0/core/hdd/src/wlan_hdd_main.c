@@ -16806,7 +16806,7 @@ int wlan_hdd_sec_get_psm(void)
  *
  * Return: 0 for success, errno on failure
  */
-static inthdd_module_init(void)
+static int hdd_module_init(void)
 {
 	int ret;
 
