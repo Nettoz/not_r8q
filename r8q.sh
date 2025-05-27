@@ -32,7 +32,7 @@ IMAGE="/home/skye/bomb/out/arch/arm64/boot/Image"
 echo "**Build outputs**"
 ls /home/skye/bomb/out/arch/arm64/boot
 echo "**Build outputs**"
-cp $IMAGE /home/skye/bomb/AnyKernel3/x1q/Image
+cp $IMAGE /home/skye/bomb/AnyKernel3/r8q/Image
 
 cd /home/skye/bomb/AnyKernel3/r8q
 rm *.zip
