@@ -16806,7 +16806,7 @@ int wlan_hdd_sec_get_psm(void)
  *
  * Return: 0 for success, errno on failure
  */
-static int hdd_module_init(void)
+static inthdd_module_init(void)
 {
 	int ret;
 
@@ -16814,6 +16814,8 @@ static int hdd_module_init(void)
 	if (ret)
 		pr_err("wlan_hdd_state_create:%x\n", ret);
 
+	hdd_driver_load();
+	
 	return ret;
 }
 
