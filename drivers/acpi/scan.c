@@ -15,7 +15,6 @@
 #include <linux/dma-mapping.h>
 #include <linux/platform_data/x86/apple.h>
 
-#include <acpi/processor.h>
 #include <asm/pgtable.h>
 
 #include "internal.h"
@@ -1733,7 +1732,6 @@ static int acpi_bus_type_and_status(acpi_handle handle, int *type,
 {
 	acpi_status status;
 	acpi_object_type acpi_type;
-	struct acpi_device_info *info;
 
 	status = acpi_get_type(handle, &acpi_type);
 	if (ACPI_FAILURE(status))
@@ -1746,16 +1744,6 @@ static int acpi_bus_type_and_status(acpi_handle handle, int *type,
 			return -ENODEV;
 
 		*type = ACPI_BUS_TYPE_DEVICE;
-		
-		status = acpi_get_object_info(handle, &info);
-		if (ACPI_SUCCESS(status) && info->valid & ACPI_VALID_HID &&
-		    !strcmp(info->hardware_id.string,
-					ACPI_PROCESSOR_DEVICE_HID)) {
-			status = acpi_bus_get_status_handle(handle, sta);
-			if (ACPI_SUCCESS(status))
-				break;
-		}
-
 		/*
 		 * acpi_add_single_object updates this once we've an acpi_device
 		 * so that acpi_bus_get_status' quirk handling can be used.
