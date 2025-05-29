@@ -1,0 +1,53 @@
+on:
+  workflow_dispatch:  # <-- Add this line to enable manual runs
+  push:
+    branches:
+      - interstellar
+  pull_request:
+    branches:
+      - interstellar
+
+      name: Kernel Build
+
+on:
+  push:
+    branches:
+      - interstellar
+  pull_request:
+    branches:
+      - interstellar
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y bc bison flex libssl-dev ccache make clang gcc zip
+
+      - name: Set up environment
+        run: |
+          export ARCH=arm64
+          export SUBARCH=arm64
+          export KBUILD_BUILD_USER=skye
+          export KBUILD_BUILD_HOST=interstellar
+
+      - name: Build kernel
+        run: |
+          bash build.sh || echo "Se não tiver build.sh, ajustar esse comando para make."
+
+      - name: Pack kernel
+        run: |
+          cd anykernel3
+          zip -r9 ../kernel-${{ github.sha }}.zip *
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kernel
+          path: kernel-*.zip
